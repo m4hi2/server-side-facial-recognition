@@ -5,3 +5,4 @@ Processes video stream captured and sent by a web browser. The processed video s
 ## Goals: 
 - Capture Video with web browser
 - Stream the video to the server
+- Show the processed video in the browser
