@@ -1,11 +1,8 @@
 import base64
 import io
-import random
-import string
 from io import StringIO
 
 import cv2
-import imutils
 import numpy as np
 from flask import Flask, render_template
 from flask.wrappers import Response
@@ -35,8 +32,6 @@ def image(data_image):
     frame = cv2.cvtColor(np.array(pimg), cv2.COLOR_RGB2BGR)
 
     # process the image frames
-
-    frame = imutils.resize(frame, width=700)
     frame = cv2.flip(frame, 1)
 
     _, imgencode = cv2.imencode(".jpg", frame)
@@ -44,9 +39,7 @@ def image(data_image):
     # base64 encode
     stringData = base64.b64encode(imgencode).decode('utf-8')
     b64_src = 'data:image/jpeg;base64,'
-
     stringData = b64_src + stringData
-
     emit('response_back', stringData)
 
 
