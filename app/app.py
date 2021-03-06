@@ -11,6 +11,8 @@ from flask.wrappers import Response
 from flask_socketio import SocketIO, emit
 from PIL import Image
 
+from face_rec import FaceRec
+
 app = Flask(__name__)
 app.config["DEBUG"] = True
 socketio = SocketIO(app)
@@ -32,6 +34,9 @@ known_face_names = [
 face_locations = []
 face_encodings = []
 face_names = []
+
+face_rec = FaceRec(known_face_encodings=known_face_encodings,
+                   known_face_names=known_face_names)
 
 
 def facerec(frame):
@@ -109,7 +114,9 @@ def image(data_image):
     frame = cv2.cvtColor(np.array(pimg), cv2.COLOR_RGB2BGR)
 
     # process the image frames
-    frame = facerec(frame)
+    # frame = facerec(frame)
+    face_rec.enqueue_input(frame)
+    frame = face_rec.get_frame()
 
     _, imgencode = cv2.imencode(".jpg", frame)
 
