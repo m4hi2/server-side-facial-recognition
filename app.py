@@ -1,7 +1,10 @@
 import base64
 import io
 import os
+import random
+import string
 from io import StringIO
+from threading import Event, Thread
 
 import cv2
 import face_recognition
@@ -13,9 +16,12 @@ from PIL import Image
 
 from face_rec import FaceRec
 
+thread = Thread()
+stop_event = Event()
+
 app = Flask(__name__)
 app.config["DEBUG"] = True
-socketio = SocketIO(app)
+socketio = SocketIO(app, logger=True)
 
 curr_path = os.path.dirname(__file__)
 
@@ -113,18 +119,32 @@ def image(data_image):
     # converting RGB to BGR, as openCV standards
     frame = cv2.cvtColor(np.array(pimg), cv2.COLOR_RGB2BGR)
 
-    # process the image frames
-    # frame = facerec(frame)
     face_rec.enqueue_input(frame)
-    frame = face_rec.get_frame()
 
-    _, imgencode = cv2.imencode(".jpg", frame)
 
-    # base64 encode
-    stringData = base64.b64encode(imgencode).decode('utf-8')
-    b64_src = 'data:image/jpeg;base64,'
-    stringData = b64_src + stringData
-    emit('response_back', stringData)
+def get_frames():
+
+    while not stop_event.isSet():
+        frame = face_rec.get_frame()
+        frame = facerec(frame)
+
+        _, imgencode = cv2.imencode(".jpg", frame)
+
+        # base64 encode
+        stringData = base64.b64encode(imgencode).decode('utf-8')
+        b64_src = 'data:image/jpeg;base64,'
+        stringData = b64_src + stringData
+        socketio.emit('frame', stringData, namespace="/stream")
+
+
+@socketio.on("connect", namespace="/stream")
+def test():
+    global thread
+    print("Mahir Connected")
+    emit("frame", "gg", namespace="/stream")
+    if not thread.is_alive():
+        print("Starting Thread")
+        thread = socketio.start_background_task(get_frames)
 
 
 if __name__ == '__main__':

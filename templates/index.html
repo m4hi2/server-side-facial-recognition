@@ -83,8 +83,12 @@
             socket.emit('image', data);
         }, 10000 / FPS);
 
+        var im_socket = io("http://127.0.0.1:5000/stream")
+        im_socket.on("connect", () => {
+            console.log("image stream back socket connected!");
+        })
 
-        socket.on('response_back', function (image) {
+        im_socket.on('frame', function (image) {
             const image_id = document.getElementById('image');
             image_id.src = image;
         });
