@@ -10,7 +10,7 @@ from eventlet.green.threading import Event, Thread
 
 camera = cv2.VideoCapture(0)
 
-sio = socketio.Server(logger=True)
+sio = socketio.Server(logger=True, cors_allowed_origins="*")
 app = socketio.WSGIApp(sio, static_files={
     '/': {'content_type': 'text/html', 'filename': 'index.html'}
 })
@@ -108,5 +108,5 @@ def connect(sid, environ):
         thread = sio.start_background_task(capture_and_send)
 
 
-if __name__ != '__main__':
-    eventlet.wsgi.server(eventlet.listen(('127.0.0.1', 5000)), app)
+if __name__ == '__main__':
+    eventlet.wsgi.server(eventlet.listen(('127.0.0.1', 5050)), app)
