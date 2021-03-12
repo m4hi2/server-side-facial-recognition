@@ -18,7 +18,7 @@ socketio = SocketIO(app)
 curr_path = os.path.dirname(__file__)
 
 mahir_image = face_recognition.load_image_file(
-    os.path.realpath("app/known_images/mahir.jpg"))
+    os.path.realpath("/home/m4hi2/Pictures/Webcam/m2.jpg"))
 mahir_face_encoding = face_recognition.face_encodings(mahir_image)[0]
 
 
