@@ -39,11 +39,12 @@ face_locations = []
 face_encodings = []
 face_names = []
 
-CURRENT_FACE = ""
+CURRENT_USER = ""
 
 
 def capture_and_send():
     while not thread_stop_event.isSet():
+        global CURRENT_USER
         _, frame = camera.read()
 
         # Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
@@ -53,7 +54,7 @@ def capture_and_send():
         face_locations = face_recognition.face_locations(rgb_frame)
         face_encodings = face_recognition.face_encodings(
             rgb_frame, face_locations)
-
+        face_names = []
         # Loop through each face in this frame of video
         for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
             # See if the face is a match for the known face(s)
@@ -73,6 +74,8 @@ def capture_and_send():
             best_match_index = np.argmin(face_distances)
             if matches[best_match_index]:
                 name = known_face_names[best_match_index]
+
+            face_names.append(name)
             top = top - 30
             bottom = bottom + 30
             right = right + 20
@@ -86,6 +89,10 @@ def capture_and_send():
             font = cv2.FONT_HERSHEY_DUPLEX
             cv2.putText(frame, name, (left + 6, bottom - 6),
                         font, 1.0, (255, 255, 255), 1)
+
+            if CURRENT_USER not in face_names:
+                CURRENT_USER = name
+                sio.emit("user", name, broadcast=True)
 
         _, imgencode = cv2.imencode(".jpg", frame)
         stringData = base64.b64encode(imgencode).decode('utf-8')
