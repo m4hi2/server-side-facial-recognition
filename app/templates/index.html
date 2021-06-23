@@ -9,12 +9,6 @@
 </head>
 
 <body>
-    <div class="container">
-        <canvas id="canvasOutput">
-            <video autoplay="true" id="videoElement"></video>
-        </canvas>
-    </div>
-
     <div class="video">
         <img src="" alt="" id="image">
 
@@ -23,66 +17,16 @@
 
     <script>
         var socket = io('http://127.0.0.1:5050')
+        var soc_flask = io('http://127.0.0.1:5000')
 
         socket.on("connect", function () {
             console.log("Connected...!", socket.connected);
         });
 
-        const video = document.querySelector("#videoElement");
-
-        video.width = 500;
-        video.height = 375;
-
-        /**
-         * Captures a image frame from the provided video element.
-         *
-         * @param {Video} video HTML5 video element from where the image frame will be captured.
-         * @param {Number} scaleFactor Factor to scale the canvas element that will be return. This is an optional parameter.
-         *
-         * @return {Canvas}
-         */
-        function capture(video, scaleFactor) {
-            if (scaleFactor == null) {
-                scaleFactor = 1;
-            }
-            var w = video.videoWidth * scaleFactor;
-            var h = video.videoHeight * scaleFactor;
-            var canvas = document.createElement('canvas');
-            canvas.width = w;
-            canvas.height = h;
-            var ctx = canvas.getContext('2d');
-            ctx.drawImage(video, 0, 0, w, h);
-            return canvas;
-        }
-
-        if (navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(function (stream) {
-                    video.srcObject = stream;
-                    video.play();
-                })
-                .catch(function (err0r) {
-                    console.log(err0r);
-                    console.log("Something Went Wrong");
-                });
-        }
-
-        // let src = new cv.Mat(video.height, video.width, cv.CV_8UC4);
-        // let dst = new cv.Mat(video.height, video.width, cv.CV_8UC1);
-        // let cap = new cv.VideoCapture(video);
-
-        const FPS = 30;
-        setInterval(() => {
-            // cap.read(src);
-
-            var type = "image/png"
-            var video_element = document.getElementById("videoElement")
-            var frame = capture(video_element, .5)
-            var data = frame.toDataURL(type);
-            data = data.replace('data:' + type + ';base64,', '');
-            socket.emit('image', data);
-        }, 10000 / FPS);
-
+        socket.on('user', function (user_id) {
+            console.log(user_id);
+            soc_flask.emit('user', user_id)
+        })
 
         socket.on('response_back', function (image) {
             const image_id = document.getElementById('image');
