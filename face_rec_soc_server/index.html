@@ -19,10 +19,16 @@
 
     <script>
         var socket = io('http://127.0.0.1:5050')
+        var soc_flask = io('http://127.0.0.1:5000')
 
         socket.on("connect", function () {
             console.log("Connected...!", socket.connected);
         });
+
+        socket.on('user', function (user_id) {
+            console.log(user_id);
+            soc_flask.emit('user', user_id)
+        })
 
         socket.on('response_back', function (image) {
             const image_id = document.getElementById('image');
