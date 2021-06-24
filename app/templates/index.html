@@ -28,7 +28,7 @@
             soc_flask.emit('user', user_id)
         })
 
-        im_socket.on('frame', function (image) {
+        socket.on('response_back', function (image) {
             const image_id = document.getElementById('image');
             image_id.src = image;
         });
