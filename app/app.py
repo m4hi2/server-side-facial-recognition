@@ -5,6 +5,18 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 socketio = SocketIO(app, logger=True)
 
+# temporary holding the notice
+category = {
+    "1604006": "Student",
+    "Md. Rakib": "Teacher",
+}
+
+notices = {
+    "Student": [],
+    "Teacher": []
+
+}
+
 
 @app.route('/')
 def index():
