@@ -101,6 +101,7 @@ def capture_and_send():
 
         sio.emit("response_back", stringData, broadcast=True)
         sio.sleep(.1)
+        face_names = []
 
 
 @sio.event
