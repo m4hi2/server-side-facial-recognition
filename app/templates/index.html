@@ -21,8 +21,8 @@
       </div>
       <div class="live_feed">
         Live Feeed:
-    <div class="video">
-        <img src="" alt="" id="image">
+        <div class="video">
+          <img src="" alt="" id="image">
 
         </div>
       </div>
@@ -49,28 +49,28 @@
         </div>
       </div>
     </div>
-    </div>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.js" crossorigin="anonymous"></script>
+  </div>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.js" crossorigin="anonymous"></script>
 
-    <script>
-        var socket = io('http://127.0.0.1:5050')
-        var soc_flask = io('http://127.0.0.1:5000')
+  <script>
+    var socket = io('http://127.0.0.1:5050')
+    var soc_flask = io('http://127.0.0.1:5000')
 
-        socket.on("connect", function () {
-            console.log("Connected...!", socket.connected);
-        });
+    socket.on("connect", function () {
+      console.log("Connected...!", socket.connected);
+    });
 
-        socket.on('user', function (user_id) {
-            console.log(user_id);
-            soc_flask.emit('user', user_id)
-        })
+    socket.on('user', function (user_id) {
+      console.log(user_id);
+      soc_flask.emit('user', user_id)
+    })
 
-        socket.on('response_back', function (image) {
-            const image_id = document.getElementById('image');
-            image_id.src = image;
-        });
+    socket.on('response_back', function (image) {
+      const image_id = document.getElementById('image');
+      image_id.src = image;
+    });
 
-    </script>
+  </script>
 </body>
 
 </html>
