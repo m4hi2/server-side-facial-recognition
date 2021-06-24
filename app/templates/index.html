@@ -2,16 +2,53 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server to Browser Video Streaming</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testing My fucking CSS Skillz</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
 </head>
 
 <body>
+  <div class="wrapper">
+    <div class="notice_area">
+      Notice Area
+    </div>
+    <div class="info_area">
+      <div class="logo_title">
+        <img id="logo_ruet" src="{{ url_for('static', filename='img/ruet.png')}}" alt="RUET LOGO" sizes="" srcset="">
+        <h1 id="title">AI Based Smart Notice Board</h1>
+      </div>
+      <div class="live_feed">
+        Live Feeed:
     <div class="video">
         <img src="" alt="" id="image">
 
+        </div>
+      </div>
+      <div class="info">Info</div>
+      <div class="credits">
+        <h3>
+          Built by:
+        </h3>
+        <div class="authors">
+          <div class="author">
+            <h4>Supervisor:</h4>
+            <h4>Md. Rakib Hossain</h4>
+            <p>Lecturer</p>
+            <p>Dept. of Electronics & Telecommunication Engineering</p>
+            <p>Rajshahi University of Engineering and Technology</p>
+          </div>
+          <div class="author">
+            <h4>Student:</h4>
+            <h4>Mahir Labib Chowdhury</h4>
+            <p>1604006</p>
+            <p>Dept. of Electronics & Telecommunication Engineering</p>
+            <p>Rajshahi University of Engineering and Technology</p>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.js" crossorigin="anonymous"></script>
 
@@ -35,6 +72,5 @@
 
     </script>
 </body>
-
 
 </html>
