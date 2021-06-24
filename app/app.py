@@ -26,6 +26,9 @@ def index():
 @socketio.on('user')
 def new_user(user_id):
     print(user_id)
+    cat = category[user_id]
+    print(category[user_id])
+    print(notices[cat])
 
 
 if __name__ == '__main__':
