@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Server to Browser Video Streaming
+    </title>
+</head>
+
+<body>
+    <div class="video">
+        <img src="" alt="" id="image">
+
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.js" crossorigin="anonymous"></script>
+
+    <script>
+        var socket = io('http://127.0.0.1:5050')
+        var soc_flask = io('http://127.0.0.1:5000')
+
+        socket.on("connect", function () {
+            console.log("Connected...!", socket.connected);
+        });
+
+        socket.on('user', function (user_id) {
+            console.log(user_id);
+            soc_flask.emit('user', user_id)
+        })
+
+        socket.on('response_back', function (image) {
+            const image_id = document.getElementById('image');
+            image_id.src = image;
+        });
+
+    </script>
+</body>
+
+
+</html>
