@@ -1,0 +1,50 @@
+html, body {
+    height: 100%;
+}
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 1px;
+    background-color: black;
+    height: 100%;
+}
+.notice_area {
+    background-color: aqua;
+}
+
+.info_area {
+    display: grid;
+    grid-template-rows: max-content;
+}
+
+.logo_title {
+    background-color: aquamarine;
+}
+
+.live_feed {
+    background-color: blue;
+}
+
+.info {
+    background-color: yellowgreen;
+}
+
+.credits {
+    background-color: rgb(143, 30, 30);
+}
+
+.authors {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#logo_ruet {
+    height: 90%;
+    width: 20%;
+    float: left;
+    margin-right: 5rem;
+}
+
+#title {
+    margin-top: 5rem;
+}
