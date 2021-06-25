@@ -27,6 +27,8 @@ soc_flask.on('user_info', function (user_info) {
     document.getElementById("dept").innerHTML = parsed_user_info.dept;
     const img_notice = document.getElementById('notice_img');
     max_page = parseInt(parsed_user_info.notices.pages);
+    document.getElementById("mx_page").innerHTML = max_page;
+    document.getElementById("cr_page").innerHTML = current_page + 1;
     current_page = 0;
     img_notice.src = "/static/img/" + parsed_user_info.category.toLowerCase() + "/" + current_page + ".jpg";
 })
@@ -37,6 +39,7 @@ document.addEventListener('keydown', function (e) {
         console.log("LEFT");
         if (current_page > 0) {
             current_page = current_page - 1;
+            document.getElementById("cr_page").innerHTML = current_page + 1;
         }
         img_notice.src = "/static/img/" + category.toLowerCase() + "/" + current_page + ".jpg";
     }
@@ -45,6 +48,7 @@ document.addEventListener('keydown', function (e) {
         if (current_page < max_page - 1) {
             current_page = current_page + 1;
         }
+        document.getElementById("cr_page").innerHTML = current_page + 1;
         img_notice.src = "/static/img/" + category.toLowerCase() + "/" + current_page + ".jpg";
     }
 })
