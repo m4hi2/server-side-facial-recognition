@@ -24,6 +24,7 @@ soc_flask.on('user_info', function (user_info) {
     document.getElementById("notice_group").innerHTML = parsed_user_info.category;
     category = parsed_user_info.category;
     document.getElementById("notices").innerHTML = parsed_user_info.notices.notice;
+    document.getElementById("dept").innerHTML = parsed_user_info.dept;
     const img_notice = document.getElementById('notice_img');
     max_page = parseInt(parsed_user_info.notices.pages);
     current_page = 0;

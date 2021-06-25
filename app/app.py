@@ -24,6 +24,11 @@ notices = {
     }
 }
 
+dept = {
+    "1604006": "ETE",
+    "Md. Rakib": "ETE",
+}
+
 
 @app.route('/')
 def index():
@@ -39,7 +44,8 @@ def new_user(user_id):
     data = {
         "current_user": user_id,
         "category": cat,
-        "notices": notices[cat]
+        "notices": notices[cat],
+        "dept": dept[user_id]
 
     }
     emit("user_info", json.dumps(data), broadcast=True)
