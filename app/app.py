@@ -9,14 +9,19 @@ socketio = SocketIO(app, logger=True)
 
 # temporary holding the notice
 category = {
-    "1604006": "Student",
+    "1604006": "Teacher",
     "Md. Rakib": "Teacher",
 }
 
 notices = {
-    "Student": [],
-    "Teacher": []
-
+    "Student": {
+        'notice': ['Online Class'],
+        'pages': 1
+    },
+    "Teacher": {
+        'notice': ['Seminar Schedule', 'Online Class'],
+        'pages': 5
+    }
 }
 
 
