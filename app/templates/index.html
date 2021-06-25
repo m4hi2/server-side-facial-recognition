@@ -12,7 +12,7 @@
 <body>
   <div class="wrapper">
     <div class="notice_area">
-      Notice Area
+      <img class="notice" id="notice_img" src="" alt="">
     </div>
     <div class="info_area">
       <div class="logo_title">
@@ -79,6 +79,8 @@
       document.getElementById("id").innerHTML = parsed_user_info.current_user;
       document.getElementById("notice_group").innerHTML = parsed_user_info.category;
       document.getElementById("notices").innerHTML = parsed_user_info.notices;
+      const img_notice = document.getElementById('notice_img');
+      img_notice.src = "/static/img/" + parsed_user_info.notices[0] + ".jpg";
     })
 
   </script>
