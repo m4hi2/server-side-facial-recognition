@@ -20,20 +20,20 @@ thread_stop_event = Event()
 mahir_image = face_recognition.load_image_file(
     os.path.realpath("/home/m4hi2/Pictures/Webcam/m2.jpg"))
 mahir_face_encoding = face_recognition.face_encodings(mahir_image)[0]
-supti_image = face_recognition.load_image_file(
-    os.path.realpath("/home/m4hi2/Pictures/Webcam/supti.jpg")
+rakib_image = face_recognition.load_image_file(
+    os.path.realpath("/home/m4hi2/Pictures/Webcam/rakib.jpg")
 )
-supti_face_encoding = face_recognition.face_encodings(supti_image)[0]
+rakib_face_encoding = face_recognition.face_encodings(rakib_image)[0]
 
 
 known_face_encodings = [
     mahir_face_encoding,
-    supti_face_encoding
+    rakib_face_encoding
 ]
 
 known_face_names = [
     "1604006",
-    "supti"
+    "Md. Rakib"
 ]
 face_locations = []
 face_encodings = []

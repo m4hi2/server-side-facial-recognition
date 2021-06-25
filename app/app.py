@@ -9,7 +9,7 @@ socketio = SocketIO(app, logger=True)
 
 # temporary holding the notice
 category = {
-    "1604006": "Teacher",
+    "1604006": "Student",
     "Md. Rakib": "Teacher",
 }
 
