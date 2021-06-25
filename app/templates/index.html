@@ -26,7 +26,12 @@
 
         </div>
       </div>
-      <div class="info">Info</div>
+      <div class="info">
+        <h4>User Info:</h4>
+        <p>ID: <span id="id"></span></p>
+        <p>Notice Group: <span id="notice_group"></span></p>
+        <p>Notices: <span id="notices"></span></p>
+      </div>
       <div class="credits">
         <h3>
           Built by:
@@ -69,6 +74,14 @@
       const image_id = document.getElementById('image');
       image_id.src = image;
     });
+
+    soc_flask.on('user_info', function (user_info) {
+      console.log(user_info)
+      var parsed_user_info = JSON.parse(user_info)
+      document.getElementById("id").innerHTML = parsed_user_info.current_user;
+      document.getElementById("notice_group").innerHTML = parsed_user_info.category;
+      document.getElementById("notices").innerHTML = parsed_user_info.notices;
+    })
 
   </script>
 </body>
