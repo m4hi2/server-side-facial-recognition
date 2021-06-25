@@ -2,39 +2,60 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server to Browser Video Streaming</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Notice Board</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
 </head>
 
 <body>
-    <div class="video">
-        <img src="" alt="" id="image">
-
+  <div class="wrapper">
+    <div class="notice_area">
+      <p><span id="cr_page"></span>/<span id="mx_page"></span></p>
+      <img class="notice" id="notice_img" src="" alt="">
     </div>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.js" crossorigin="anonymous"></script>
-
-    <script>
-        var socket = io('http://127.0.0.1:5050')
-        var soc_flask = io('http://127.0.0.1:5000')
-
-        socket.on("connect", function () {
-            console.log("Connected...!", socket.connected);
-        });
-
-        socket.on('user', function (user_id) {
-            console.log(user_id);
-            soc_flask.emit('user', user_id)
-        })
-
-        socket.on('response_back', function (image) {
-            const image_id = document.getElementById('image');
-            image_id.src = image;
-        });
-
-    </script>
+    <div class="info_area">
+      <div class="logo_title">
+        <img id="logo_ruet" src="{{ url_for('static', filename='img/ruet.png')}}" alt="RUET LOGO" sizes="" srcset="">
+        <h1 id="title">AI Based Smart Notice Board</h1>
+      </div>
+      <div class="live_feed">
+        <div class="video">
+          <img src="" alt="" id="image">
+        </div>
+      </div>
+      <div class="info">
+        <h4>User Info:</h4>
+        <p>ID: <span id="id"></span></p>
+        <p>Notice Group: <span id="notice_group"></span> (<span id="dept"></span>)</p>
+        <p>Notices: <span id="notices"></span></p>
+      </div>
+      <div class="credits">
+        <h3>
+          Built by:
+        </h3>
+        <div class="authors">
+          <div class="author">
+            <h4>Supervisor:</h4>
+            <h4>Md. Rakib Hossain</h4>
+            <p>Lecturer</p>
+            <p>Dept. of Electronics & Telecommunication Engineering</p>
+            <p>Rajshahi University of Engineering and Technology</p>
+          </div>
+          <div class="author">
+            <h4>Student:</h4>
+            <h4>Mahir Labib Chowdhury</h4>
+            <p>1604006</p>
+            <p>Dept. of Electronics & Telecommunication Engineering</p>
+            <p>Rajshahi University of Engineering and Technology</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.js" crossorigin="anonymous"></script>
+  <script src="{{url_for('static', filename='js/main.js')}}"></script>
 </body>
-
 
 </html>
