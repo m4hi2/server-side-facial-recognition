@@ -13,11 +13,11 @@ h4 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 1px;
-    background-color: black;
+    /* background-color: black; */
     height: 100%;
 }
 .notice_area {
-    background-color: aqua;
+    /* background-color: aqua; */
 }
 
 .notice {
@@ -30,19 +30,19 @@ h4 {
 }
 
 .logo_title {
-    background-color: aquamarine;
+    /* background-color: aquamarine; */
 }
 
 .live_feed {
-    background-color: blue;
+    /* background-color: blue; */
 }
 
 .info {
-    background-color: yellowgreen;
+    /* background-color: yellowgreen; */
 }
 
 .credits {
-    background-color: rgb(143, 30, 30);
+    /* background-color: rgb(143, 30, 30); */
 }
 
 .authors {
