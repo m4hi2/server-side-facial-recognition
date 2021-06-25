@@ -1,6 +1,14 @@
 html, body {
     height: 100%;
 }
+
+h3 {
+    margin: 0;
+}
+
+h4 {
+    margin: 0px 5px 0px 0px;
+}
 .wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
