@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 
@@ -29,6 +31,13 @@ def new_user(user_id):
     cat = category[user_id]
     print(category[user_id])
     print(notices[cat])
+    data = {
+        "current_user": user_id,
+        "category": cat,
+        "notices": notices[cat]
+
+    }
+    emit("user_info", json.dumps(data), broadcast=True)
 
 
 if __name__ == '__main__':
