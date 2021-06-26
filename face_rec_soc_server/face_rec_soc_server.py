@@ -90,7 +90,8 @@ def capture_and_send():
             cv2.putText(frame, name, (left + 6, bottom - 6),
                         font, 1.0, (255, 255, 255), 1)
 
-            if CURRENT_USER not in face_names and name != "Unknown":
+            # if CURRENT_USER not in face_names and name != "Unknown":
+            if CURRENT_USER not in face_names:
                 CURRENT_USER = name
                 sio.emit("user", CURRENT_USER, broadcast=True)
 

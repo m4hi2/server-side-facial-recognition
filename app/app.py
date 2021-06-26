@@ -11,6 +11,7 @@ socketio = SocketIO(app, logger=True)
 category = {
     "1604006": "Student",
     "Md. Rakib": "Teacher",
+    "Unknown": "Unknown",
 }
 
 notices = {
@@ -21,12 +22,17 @@ notices = {
     "Teacher": {
         'notice': ['Seminar Schedule', 'Online Class'],
         'pages': 5
+    },
+    "Unknown": {
+        'notice': ['Admission Test Reschedule'],
+        'pages': 1
     }
 }
 
 dept = {
     "1604006": "ETE",
     "Md. Rakib": "ETE",
+    "Unknown": "Unknown"
 }
 
 
